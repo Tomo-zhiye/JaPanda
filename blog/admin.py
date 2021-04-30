@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import models
+from mptt.admin import MPTTModelAdmin
 
 @admin.register(models.Post)
 class AuthorAdmin(admin.ModelAdmin):
@@ -9,3 +10,4 @@ class AuthorAdmin(admin.ModelAdmin):
     }
 
 admin.site.register(models.Category)
+admin.site.register(models.Comment, MPTTModelAdmin)

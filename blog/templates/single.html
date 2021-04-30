@@ -14,13 +14,24 @@
           {{ total_comments }} comment{{ total_comments|pluralize }}
         </h2>
         {% endwith %}
-        {% for comment in comments %}
-        Comment {{ forloop.counter }} by {{ comment.name }}
-        on {{ comment.publish_date }}
-        {{ comment.content|linebreaks }}
-        {% empty %}
-        <p>There are no comments for this post.</p>
-        {% endfor %}
+
+        {% load mptt_tags %}
+        <div>
+
+          {% recursetree comments %}
+
+          <div>{{ node.content }}</div>
+
+          {% if not node.is_leaf_node %}
+          <div class='children pr-2 pr-md-5'>
+            {{ children }}
+          </div>
+          {% endif %}
+
+          {% endrecursetree %}
+      
+        </div>
+
         <h2>Make a new comment</h2>
 
         <form id='myform' method='post'>

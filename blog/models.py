@@ -49,7 +49,7 @@ class Post(models.Model):
 class Comment(MPTTModel):
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    parent = TreeForeignkey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     name = models.CharField(max_length=50)
     email = models.EmailField()
     content = models.TextField()
